@@ -11,11 +11,13 @@
 
 <body style="text-align:center;">
     <h1>合奏チェック</h1>
+    <p><a href="https://www.pololu.com/docs/0J18/3">Popoluのmusic controlシミュレーション</a>を行います。</p>
+    <p>「Add part」で合奏パートを増やすことができます。</p>
 
     <div id="chord">
         <input type="text" id="code1" style="font-size:2em" value="! T60 L8 >CG>C" /><br>
-        <input type="text" id="code2" style="font-size:2em" value="! T60 L8 EDE"/><br>
-        <input type="text" id="code3" style="font-size:2em" value="! T60 L8 GBG"/><br>
+        <input type="text" id="code2" style="font-size:2em" value="! T60 L8 EDE" /><br>
+        <input type="text" id="code3" style="font-size:2em" value="! T60 L8 GBG" /><br>
     </div>
 
     <button id="add" style="margin:30px;">Add part</button>
@@ -24,4 +26,5 @@
 
     <h2>注意事項</h2>
     <p>テンポは全パートで揃えなければ不具合が発生します。変更する場合は楽譜の先頭で行ってください。</p>
+    <p>16分音符に対応していません。スタッカート設定に対応していません。</p>
 </body>
