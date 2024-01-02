@@ -1,4 +1,3 @@
-const chords=[["C5","G4","C5"], ["E4","D4","E4"], ["G4","B4","G4"]];
 let part = 3;
 let part_control_values = [];
 
@@ -9,7 +8,7 @@ function make_chord(){
     return [...Array(part).keys()].map((part_num) => {
         let music_list = document.getElementById("code"+(part_num+1)).value;
         if (!music_list) return [];
-        
+
         music_list = music_list.toUpperCase().split(/\s+/);
         console.log(music_list);
         music_list = music_list.flatMap((music) => {
@@ -26,6 +25,7 @@ function make_chord(){
             }
             if (regex_result = tone.match(/T(?<number>\d+)/i)) {
                 part_control_values[part_num].Tempo = Number(regex_result.groups.number);
+                Tone.Transport.bpm.value = part_control_values[part_num].Tempo;
                 return [];
             }
             if (regex_result = tone.match(/L(?<number>\d+)/i)) {
@@ -93,7 +93,6 @@ function opt_make() {
 
 async function play_chord() {
     await Tone.start();
-    Tone.Transport.bpm.value = 60; // 1分あたり60
 
     const chords = make_chord();
     console.log(chords);
@@ -102,9 +101,9 @@ async function play_chord() {
         const synth = new Tone.Synth({
             portamento: 0,
             oscillator: {
-                // type: "triangle"
+                type: "triangle"
                 // type: "sine"
-                type: "square"
+                // type: "square" // 和音が聞きづらい
             },
             envelope: {
                 attack : 0.005 , // second?
@@ -114,9 +113,7 @@ async function play_chord() {
             }
         }).toDestination();
         const part = new Tone.Part(((time, value) => {
-            synth.triggerAttackRelease(value.note, value.duration, time, value.velocity)
-            // synth.unsync();
-            // Tone.Transport.bpm.value = 120; // 1分あたり60
+            synth.triggerAttackRelease(value.note, value.duration, time, value.velocity);
         }), chord).start();
     });
     Tone.Transport.start();
