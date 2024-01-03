@@ -36,11 +36,12 @@ function make_chord(){
                 part_control_values[part_num].Volume = Number(regex_result.groups.number);
                 return [];
             }
-            if (tone == '!') {
+            if (tone === '!') {
                 part_control_values[part_num] = get_default_control_values();
+                Tone.Transport.bpm.value = part_control_values[part_num].Tempo;
                 return [];
             }
-            if (tone == 'MS' || tone == 'ML') { // スタッカート or レガート
+            if (tone === 'MS' || tone === 'ML') { // スタッカート or レガート
                 part_control_values[part_num].Articulation = tone;
                 return [];
             }
