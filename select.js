@@ -6,7 +6,7 @@ function get_default_control_values(){
 }
 function make_chord(){
     return [...Array(part).keys()].map((part_num) => {
-        let music_list = document.getElementById("code"+(part_num+1)).value;
+        let music_list = document.getElementById("code"+(part_num+1)).value.trim();
         if (!music_list) return [];
 
         music_list = music_list.toUpperCase().split(/\s+/);
