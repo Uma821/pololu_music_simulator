@@ -119,6 +119,7 @@ async function play_chord() {
             synth.triggerAttackRelease(value.note, value.duration, time, value.velocity);
         }), chord).start();
     });
+    console.log("music start!");
     Tone.Transport.start();
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html>
 <head>
     <meta http-equiv="content-type" charset="UTF-8">
     <title>合奏チェック</title>
@@ -15,16 +15,39 @@
     <p>「Add part」で合奏パートを増やすことができます。</p>
 
     <div id="chord">
-        <input type="text" id="code1" style="font-size:2em" value="! T60 L8 >CG>C" /><br>
-        <input type="text" id="code2" style="font-size:2em" value="! T60 L8 EDE" /><br>
-        <input type="text" id="code3" style="font-size:2em" value="! T60 L8 GBG" /><br>
+        <input type="text" id="code1" style="font-size:2em" /><br>
+        <input type="text" id="code2" style="font-size:2em" /><br>
+        <input type="text" id="code3" style="font-size:2em" /><br>
     </div>
 
     <button id="add" style="margin:30px;">Add part</button>
     <button id="play" style="margin:30px;">play!!</button>
     <button id="sub" style="margin:30px;">Sub part</button>
+    <br>
+    <button id="share" style="margin:30px;">Share</button>
 
     <h2>注意事項</h2>
     <p>テンポは全パートで揃えなければ不具合が発生します。変更する場合は楽譜の先頭で行ってください。</p>
     <p>複付点音符(休符)に対応していません。スタッカート設定に対応していません。</p>
 </body>
+<script>
+    const url = new URL(document.location);
+    const params = url.searchParams;
+    const code1 = params.get('code1') ?? "! T60 L8 >CG>C";
+    const code2 = params.get('code2') ?? "! T60 L8 EDE";
+    const code3 = params.get('code3') ?? "! T60 L8 GBG";
+
+    document.getElementById("code1").value = code1;
+    document.getElementById("code2").value = code2;
+    document.getElementById("code3").value = code3;
+
+    document.getElementById("share").addEventListener("click", () => {
+        // location.href=`${url.protocol}//${url.username}:${url.password}@${url.host}${url.pathname}?code1=${encodeURIComponent(document.getElementById("code1").value)}&code2=${encodeURIComponent(document.getElementById("code2").value)}&code3=${encodeURIComponent(document.getElementById("code3").value)}${url.hash}`;
+
+        params.set('code1', document.getElementById("code1").value);
+        params.set('code2', document.getElementById("code2").value);
+        params.set('code3', document.getElementById("code3").value);
+        location.href = url.href;
+    });
+</script>
+</html>
