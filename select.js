@@ -83,11 +83,13 @@ function opt_make() {
     document.getElementById("add").addEventListener("click", () => {
         let chord = document.getElementById("chord");
         chord.innerHTML += '\n<input type="text" id="code' + ++part +'" style="font-size:2em" /><br>';
+        part_control_values.push(get_default_control_values());
     });
     document.getElementById("sub").addEventListener("click", () => {
         let chord = document.getElementById("chord");
-        chord.lastElementChild.remove();
-        chord.lastElementChild.remove();
+        chord.lastElementChild.remove(); // br
+        chord.lastElementChild.remove(); // input
+        part_control_values.pop();
         --part;
     });
 }
